@@ -1,12 +1,23 @@
+import { ApolloClient, InMemoryCache } from '@apollo/client';
+import { ApolloProvider } from '@apollo/client/react';
 import React from 'react';
 import ReactDOM from 'react-dom';
+
+import { splitLink } from 'shared/graphql/utils/splitLink';
 
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 
+const client = new ApolloClient({
+  link: splitLink,
+  cache: new InMemoryCache(),
+});
+
 ReactDOM.render(
   <React.StrictMode>
-    <App />
+    <ApolloProvider client={client}>
+      <App />
+    </ApolloProvider>
   </React.StrictMode>,
   document.getElementById('root'),
 );

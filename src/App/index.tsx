@@ -1,40 +1,28 @@
-import { ApolloClient, InMemoryCache } from '@apollo/client';
-import { ApolloProvider } from '@apollo/client/react';
-import { useState } from 'react';
+import { BrowserRouter as Router } from 'react-router-dom';
 
-import awfulBaby from 'shared/assets/awful-baby.gif';
-
+import Header from 'shared/components/Header';
+import Layout from 'shared/components/Layout';
 import Main from 'shared/components/Main';
-import Title from 'shared/components/Title';
-
-import { splitLink } from 'shared/graphql/utils/splitLink';
+import Navigation from 'shared/components/Navigation';
+import Semibold from 'shared/components/Semibold';
 
 import GlobalStyle from 'shared/styles/GlobalStyle';
 
-const client = new ApolloClient({
-  link: splitLink,
-  cache: new InMemoryCache(),
-});
-
 const App = (): JSX.Element => {
-  const [showAwfulBaby, setShowAwfulBaby] = useState(false);
-
   return (
     <>
-      <ApolloProvider client={client}>
-        <Main>
-          {showAwfulBaby ? (
-            <img
-              src={awfulBaby}
-              alt="The most hideous child you have seen today."
-            />
-          ) : (
-            <Title onClick={() => setShowAwfulBaby(true)}>
-              Subscribe or Die.
-            </Title>
-          )}
-        </Main>
-      </ApolloProvider>
+      <Router>
+        <Layout>
+          <Header>
+            <Semibold centered>Finn Mertens</Semibold>
+          </Header>
+
+          <Navigation />
+
+          <Main />
+        </Layout>
+      </Router>
+
       <GlobalStyle />
     </>
   );

@@ -6,7 +6,7 @@ const GlobalStyle = createGlobalStyle`
 
   &:root {
     --primary: #252525;
-    --white: #fbfbfb;
+    --background: #E5E5E5;
     --brand: palevioletred;
   }
 
